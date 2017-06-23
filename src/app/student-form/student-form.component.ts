@@ -54,8 +54,4 @@ export class StudentFormComponent implements OnInit {
     
   }
 
-  goBack(): void {
-    this.location.go("/student");
-  }
-
 }
