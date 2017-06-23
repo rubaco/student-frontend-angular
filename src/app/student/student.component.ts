@@ -11,7 +11,7 @@ import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.compone
 })
 export class StudentComponent implements OnInit {
 
-  @Input()errorMessage: string;
+  errorMessage: string;
   successMessage: string;
   students: any[];
   mode = 'Observable';
