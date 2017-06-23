@@ -1,0 +1,63 @@
+<ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/student">Students</a></li>
+    <li class="active">Manage Student</li>
+</ol>
+
+<br/>
+
+<a class="btn btn-primary" routerLink="/student">Return to Students</a>
+
+<h1>Manage Student</h1>
+
+<div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage">
+    {{errorMessage}} {{successMessage}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form (ngSubmit)="saveStudent(student.student_id)"  #studentForm="ngForm" class="form-horizontal">
+  <input [(ngModel)]="student.student_id" #student_id="ngModel" type="hidden" name="student_id">
+  <div class="form-group">
+    <label for="first_name" class="col-sm-2 control-label">First Name</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="student.first_name" #first_name="ngModel" type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="last_name" class="col-sm-2 control-label">Last Name</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="student.last_name" type="text" class="form-control" id="last_name" name="last_name"  placeholder="Last Name" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="start_date" class="col-sm-2 control-label">Start Date</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="student.start_date" type="text" class="form-control" id="start_date" name="start_date" placeholder="2017-01-01" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="gpa" class="col-sm-2 control-label">GPA</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="student.gpa" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="sat" class="col-sm-2 control-label">SAT Score</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="student.sat" type="text" class="form-control" id="sat" name="sat" placeholder="1400">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="major_id" class="col-sm-2 control-label">Major ID</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="student.major" type="text" class="form-control" id="major_id" name="major_id">
+    </div>
+  </div>
+   <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
