@@ -49,6 +49,8 @@ export class StudentFormComponent implements OnInit {
             student => this.successMessage = "Record added succesfully",
             error =>  this.errorMessage = <any>error);
     }
+
+    this.student = {};
     
   }
 
