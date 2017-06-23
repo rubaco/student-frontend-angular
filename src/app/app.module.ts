@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { StudentFormComponent } from './student-form/student-form.component';
+import { StatusMessageComponent } from './status-message/status-message.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { StudentFormComponent } from './student-form/student-form.component';
     StudentComponent,
     HomeComponent,
     DeleteConfirmComponent,
-    StudentFormComponent
+    StudentFormComponent,
+    StatusMessageComponent
   ],
   imports: [
     BrowserModule,

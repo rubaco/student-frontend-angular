@@ -10,12 +10,7 @@
 
 <h1>Manage Student</h1>
 
-<div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage">
-    {{errorMessage}} {{successMessage}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
 <form (ngSubmit)="saveStudent(student.student_id)"  #studentForm="ngForm" class="form-horizontal">
   <input [(ngModel)]="student.student_id" #student_id="ngModel" type="hidden" name="student_id">
