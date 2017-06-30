@@ -2,6 +2,7 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 import { DataService } from '../data.service'
 
@@ -15,7 +16,7 @@ export class StudentFormComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
 
-  student: object = {};
+  student: object;
 
   getRecordForEdit(){
     this.route.params
@@ -34,24 +35,23 @@ export class StudentFormComponent implements OnInit {
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
       });
-  
+
   }
 
-  saveStudent(id){
-    if(typeof id === "number"){
-      this.dataService.editRecord("student", this.student, id)
+  saveStudent(student: NgForm){
+    if(typeof student.value.student_id === "number"){
+      this.dataService.editRecord("student", student.value, student.value.student_id)
           .subscribe(
             student => this.successMessage = "Record updated succesfully",
             error =>  this.errorMessage = <any>error);
     }else{
-      this.dataService.addRecord("student", this.student)
+      this.dataService.addRecord("student", student)
           .subscribe(
             student => this.successMessage = "Record added succesfully",
             error =>  this.errorMessage = <any>error);
+            this.student = {};
     }
 
-    this.student = {};
-    
   }
 
 }

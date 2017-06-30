@@ -32,7 +32,7 @@
       <td>{{student.start_date}}</td>
       <td>{{student.gpa}}</td>
       <td>{{student.sat}}</td>
-      <td>{{student.major_id}}</td>
+      <td>{{student.major?.major}}</td>
       <td class="text-center">
         <a class="btn btn-primary" [routerLink]="['/student/edit/', student.student_id]">Edit</a>&nbsp;
         <button (click)="deleteStudent(student.student_id)" class="btn btn-danger">Delete</button>

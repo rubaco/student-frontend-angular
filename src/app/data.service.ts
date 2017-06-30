@@ -5,11 +5,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/expand';
+import 'rxjs/add/observable/empty';
 
 @Injectable()
 export class DataService {
 
     private baseUrl = 'http://localhost:1337/'
+
+    found = false;
 
     constructor (private http: Http) {}
 
@@ -36,19 +40,16 @@ export class DataService {
 
     editRecord(endpoint: string, record:object, id:number): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
-        console.log(record)
-        console.log(apiUrl)
         return this.http.put(apiUrl, record)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    addRecord(endpoint: string, record:object): Observable<object> {
+    addRecord(endpoint: string, record:object): Observable<any> {
         let apiUrl = `${this.baseUrl}${endpoint}`;
         console.log(apiUrl)
         return this.http.post(apiUrl, record)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .map(this.extractData);
     }
 
 
@@ -69,10 +70,10 @@ export class DataService {
                 }else{
                     const errorJSON = error.json();
                     errMsg = errorJSON.message;
-                } 
+                }
             }
         }
-        
+
         return Observable.throw(errMsg);
     }
 
