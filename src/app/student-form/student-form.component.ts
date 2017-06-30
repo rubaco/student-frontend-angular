@@ -45,7 +45,7 @@ export class StudentFormComponent implements OnInit {
             student => this.successMessage = "Record updated succesfully",
             error =>  this.errorMessage = <any>error);
     }else{
-      this.dataService.addRecord("student", student)
+      this.dataService.addRecord("student", student.value)
           .subscribe(
             student => this.successMessage = "Record added succesfully",
             error =>  this.errorMessage = <any>error);
