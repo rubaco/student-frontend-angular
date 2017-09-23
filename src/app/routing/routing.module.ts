@@ -22,6 +22,9 @@ import { InstructorFormComponent }   from '../instructor-form/instructor-form.co
 import { MajorClassComponent }   from '../major-class/major-class.component';
 import { MajorClassFormComponent }   from '../major-class-form/major-class-form.component';
 
+import { StudentClassComponent }   from '../student-class/student-class.component';
+import { StudentClassFormComponent }   from '../student-class-form/student-class-form.component';
+
 
 
 
@@ -58,6 +61,13 @@ const routes: Routes = [
   { path: 'major-class-form',  component: MajorClassFormComponent },
   { path: 'major-class-form/edit/:id', component: MajorClassFormComponent },
   { path: 'major-class-form/add', component: MajorClassFormComponent },
+  { path: 'student-class',  component: StudentClassComponent },
+  { path: 'student-class/edit/:id', component: StudentClassComponent },
+  { path: 'student-class/add', component: StudentClassComponent },
+  { path: 'student-class-form',  component: StudentClassFormComponent },
+  { path: 'student-class-form/edit/:id', component: StudentClassFormComponent },
+  { path: 'student-class-form/add', component: StudentClassFormComponent },
+
 ];
  
 @NgModule({
