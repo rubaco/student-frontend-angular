@@ -11,7 +11,7 @@
 
 <a class="btn btn-primary" routerLink="/major-class">Return to Majors Classes</a>
 
-<h1>Manage Major</h1>
+<h1>Manage Major Class</h1>
 
 <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
@@ -20,16 +20,22 @@
 
 
 <div class="form-group">
-  <label for="major" class="col-sm-2 control-label">Major</label>
+  <label for="major_id" class="col-sm-2 control-label">Major</label>
   <div class="col-sm-10">
-    <input [ngModel]="major_class?.major.major_id" ngModel #major_id="ngModel" type="text" class="form-control" id="major_id" name="major_id" placeholder="major id">
+    <input [ngModel]="major_class?.major.major_id" ngModel #major_id="ngModel" type="text" class="form-control" id="major_id" name="major_id" placeholder="major id" required>
+    <span *ngIf="formErrors.major_id" class="text-danger">
+      {{ formErrors.major_id }}
+    </span>
   </div>
 </div>
 
 <div class="form-group">
-  <label for="class" class="col-sm-2 control-label">Class</label>
+  <label for="class_id" class="col-sm-2 control-label">Class</label>
   <div class="col-sm-10">
-    <input [ngModel]="major_class?.class.class_id" ngModel #class_id="ngModel" type="text" class="form-control" id="class_id" name="class_id" placeholder="class id">
+    <input [ngModel]="major_class?.class.class_id" ngModel #class_id="ngModel" type="text" class="form-control" id="class_id" name="class_id" placeholder="class id" required>
+    <span *ngIf="formErrors.class_id" class="text-danger">
+      {{ formErrors.class_id }}
+    </span>
   </div>
 </div>
 

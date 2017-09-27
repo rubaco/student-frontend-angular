@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -12,6 +12,9 @@ import { DataService } from '../data.service'
   styleUrls: ['./klass-form.component.css']
 })
 export class KlassFormComponent implements OnInit {
+
+  klassForm: NgForm;
+  @ViewChild('klassForm') currentForm: NgForm;
 
   successMessage: string;
   errorMessage: string;
@@ -53,6 +56,59 @@ export class KlassFormComponent implements OnInit {
     }
 
   }
+
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    this.klassForm = this.currentForm;
+    this.klassForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged(data)
+      );
+  }
+
+  onValueChanged(data?: any) {
+    let form = this.klassForm.form;
+
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+
+  formErrors = {
+    'instructor_id': '',
+    'subject': '',
+    'course': '',
+ 
+  };
+
+  validationMessages = {
+ 
+    'instructor_id': {
+      'required': 'Instructor Id is required.',
+      'maxlength': 'Instructor Id cannot be more than 10 characters long.',
+    },
+
+    'subject': {
+      'maxlength': 'Subject Id cannot be more than 30 characters long.',
+    },
+
+    'course': {
+      'maxlength': 'Subject Id cannot be more than 30 characters long.',
+    }
+  };
 
 }
 

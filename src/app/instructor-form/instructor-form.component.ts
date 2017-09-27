@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -12,6 +12,9 @@ import { DataService } from '../data.service'
   styleUrls: ['./instructor-form.component.css']
 })
 export class InstructorFormComponent implements OnInit {
+
+  instructorForm: NgForm;
+  @ViewChild('instructorForm') currentForm: NgForm;
 
   successMessage: string;
   errorMessage: string;
@@ -53,6 +56,78 @@ export class InstructorFormComponent implements OnInit {
     }
 
   }
+
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    this.instructorForm = this.currentForm;
+    this.instructorForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged(data)
+      );
+  }
+
+  onValueChanged(data?: any) {
+    let form = this.instructorForm.form;
+
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'first_name': '',
+    'last_name': '',
+    'major_id': '',
+    'years_of_experience': '',
+    'tenured': ''
+
+
+
+  };
+
+  validationMessages = {
+ 
+    'first_name': {
+      'required': 'first name is required.',
+      'maxlength': 'first name cannot be more than 50 characters long.'
+    },
+
+    'last_name': {
+      'required': 'last name is required.',
+      'maxlength': 'last name cannot be more than 50 characters long.'
+    },
+
+    'major_id': {
+      'required': 'major id is required.',
+      'maxlength': 'major Id cannot be more than 50 characters long.'
+    },
+
+    'years_of_experience': {
+      'required': 'years of experience is required.',
+      'maxlength': 'years of experience cannot be more than 50 characters long.'
+    },
+
+    'tenured': {
+      'required': 'tenured is required.',
+      'maxlength': 'tenured cannot be more than 50 characters long.'
+    }
+
+   
+
+  }
+
 
 }
 

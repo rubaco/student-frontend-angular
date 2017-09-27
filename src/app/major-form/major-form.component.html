@@ -19,7 +19,10 @@
 <div class="form-group">
   <label for="major" class="col-sm-2 control-label">Major</label>
   <div class="col-sm-10">
-    <input [ngModel]="major.major" ngModel #major="ngModel" type="text" class="form-control" id="major" name="major" placeholder="biography">
+    <input [ngModel]="major.major" ngModel #major="ngModel" type="text" class="form-control" id="major" name="major" placeholder="biography" required minlength=“2” required>
+    <span *ngIf="formErrors.major" class="text-danger">
+      {{ formErrors.major }}
+    </span>
   </div>
 </div>
 

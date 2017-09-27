@@ -19,7 +19,10 @@
 <div class="form-group">
   <label for="grade" class="col-sm-2 control-label">Grade</label>
   <div class="col-sm-10">
-    <input [ngModel]="grade?.grade" ngModel #sat="ngModel" type="text" class="form-control" id="grade" name="grade" placeholder="grade">
+    <input [ngModel]="grade?.grade" ngModel #sat="ngModel" type="text" class="form-control" id="grade" name="grade" placeholder="grade" required maxlength="50" required>
+    <span *ngIf="formErrors.grade" class="text-danger">
+      {{ formErrors.grade }}
+    </span>
   </div>
 </div>
 

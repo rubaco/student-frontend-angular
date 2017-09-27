@@ -18,12 +18,18 @@
   <label for="student_id" class="col-sm-2 control-label">Student Id</label>
   <div class="col-sm-10">
     <input [ngModel]="student_class?.student.student_id" ngModel #first_name="ngModel" type="text" class="form-control" id="student_id" name="student_id" placeholder="Student Id" required>
+    <span *ngIf="formErrors.student_id" class="text-danger">
+      {{ formErrors.student_id }}
+    </span>
   </div>
 </div>
 <div class="form-group">
   <label for="class_id" class="col-sm-2 control-label">Class Id</label>
   <div class="col-sm-10">
     <input [ngModel]="student_class?.class.class_id" ngModel #last_name="ngModel" type="text" class="form-control" id="class_id" name="class_id"  placeholder="Class Id" required>
+    <span *ngIf="formErrors.class_id" class="text-danger">
+      {{ formErrors.class_id}}
+    </span>
   </div>
 </div>
 

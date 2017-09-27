@@ -1,5 +1,6 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -12,6 +13,9 @@ import { DataService } from '../data.service'
   styleUrls: ['./major-form.component.css']
 })
 export class MajorFormComponent implements OnInit {
+
+  majorForm: NgForm;
+  @ViewChild('majorForm') currentForm: NgForm;
 
   successMessage: string;
   errorMessage: string;
@@ -52,6 +56,50 @@ export class MajorFormComponent implements OnInit {
             this.major = {};
     }
 
+  }
+
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    this.majorForm = this.currentForm;
+    this.majorForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged(data)
+      );
+  }
+
+  onValueChanged(data?: any) {
+    let form = this.majorForm.form;
+
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'major': ''
+  };
+
+  validationMessages = {
+ 
+
+
+    'major': {
+      'required': 'First name is required.',
+      'minlength': 'First name must be at least 2 characters long.',
+  
+    },
   }
 
 }
